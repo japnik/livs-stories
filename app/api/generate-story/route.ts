@@ -52,8 +52,8 @@ export async function POST(request: NextRequest) {
 
     const storyText = completion.choices[0].message.content || '';
 
-    // Use v3 model for both languages (latest preview model)
-    const ttsModelId = 'eleven_v3';
+    // Use turbo model for faster generation to avoid Netlify timeout
+    const ttsModelId = 'eleven_turbo_v2_5';
 
     // Generate audio using ElevenLabs with language support
     const ttsResponse = await fetch(
