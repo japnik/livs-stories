@@ -382,7 +382,7 @@ export default function Home() {
               ) : (
                 <div className="flex flex-col gap-3">
                   <div className="bg-gray-50 p-4 rounded-xl">
-                    <audio controls src={audioUrl} className="w-full" />
+                    <audio controls src={audioUrl || undefined} className="w-full" />
                   </div>
                   <div className="flex gap-2">
                     <button
