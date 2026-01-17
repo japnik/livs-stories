@@ -6,10 +6,10 @@ import { supabase, Voice, Story } from '@/lib/supabase';
 
 const PRESET_RELATIONSHIPS = [
   { id: 'mummy', label: 'Mummy', emoji: '👩' },
-  { id: 'papa', label: 'Papa', emoji: '👨' },
-  { id: 'dadu', label: 'Dadu', emoji: '👴' },
+  { id: 'papa', label: 'Papa', emoji: '👳‍♂️' },
+  { id: 'dadu', label: 'Dadu', emoji: '👳‍♂️' },
   { id: 'dadi', label: 'Dadi', emoji: '👵' },
-  { id: 'nanu', label: 'Nanu', emoji: '🧓' },
+  { id: 'nanu', label: 'Nanu', emoji: '👳‍♂️' },
   { id: 'naani', label: 'Naani', emoji: '👵' },
 ];
 
