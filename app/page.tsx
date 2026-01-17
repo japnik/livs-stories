@@ -6,12 +6,12 @@ import { Sparkles, Mic, Play, StopCircle, RotateCcw, X } from 'lucide-react';
 import { supabase, Voice, Story } from '@/lib/supabase';
 
 const PRESET_RELATIONSHIPS = [
-  { id: 'mummy', label: 'Mummy', emoji: '👩', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mummy&backgroundColor=b6e3f4' },
-  { id: 'papa', label: 'Papa', emoji: '👳‍♂️', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Papa&backgroundColor=ffdfbf&accessories=prescription01&top=turban' },
-  { id: 'dadu', label: 'Dadu', emoji: '👳‍♂️', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Dadu&backgroundColor=d1d4f9&accessories=prescription02&top=turban&facialHair=beardMajestic' },
-  { id: 'dadi', label: 'Dadi', emoji: '👵', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Dadi&backgroundColor=ffd5dc&top=hijab' },
-  { id: 'nanu', label: 'Nanu', emoji: '👳‍♂️', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Nanu&backgroundColor=c0aede&accessories=prescription01&top=turban&facialHair=beardMedium' },
-  { id: 'naani', label: 'Naani', emoji: '👵', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Naani&backgroundColor=ffeaa7&top=hijab' },
+  { id: 'mummy', label: 'Mummy', emoji: '👩', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mummy&backgroundColor=ffe5e5&top=longHairStraight&clotheType=graphicShirt&clotheColor=pink' },
+  { id: 'papa', label: 'Papa', emoji: '👳‍♂️', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Papa&backgroundColor=ffdab3&top=turban&facialHairType=beardMedium&facialHairColor=black&clotheType=hoodie&clotheColor=blue' },
+  { id: 'dadu', label: 'Dadu', emoji: '👳‍♂️', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Dadu&backgroundColor=d4e3ff&top=turban&facialHairType=beardMajestic&facialHairColor=gray&accessoriesType=prescription02&clotheType=blazerShirt' },
+  { id: 'dadi', label: 'Dadi', emoji: '👵', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Dadi&backgroundColor=fff0f5&top=longHairBun&accessoriesType=prescription01&clotheType=blazerSweater&clotheColor=pastelRed' },
+  { id: 'nanu', label: 'Nanu', emoji: '👳‍♂️', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Nanu&backgroundColor=e8d5ff&top=turban&facialHairType=beardLight&facialHairColor=gray&accessoriesType=prescription01&clotheType=shirtCrewNeck' },
+  { id: 'naani', label: 'Naani', emoji: '👵', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Naani&backgroundColor=fffacd&top=longHairMiaWallace&accessoriesType=prescription02&clotheType=graphicShirt&clotheColor=pastelOrange' },
 ];
 
 const PUNJABI_TRANSCRIPT = `ਮੇਰੀ ਪਿਆਰੀ ਲਿਵ, ਤੂੰ ਸਾਡੇ ਪਰਿਵਾਰ ਦਾ ਸਭ ਤੋਂ ਕੀਮਤੀ ਤੋਹਫ਼ਾ ਹੈਂ। ਹਰ ਦਿਨ ਤੇਰੇ ਨਾਲ ਇੱਕ ਨਵਾਂ ਅਨੁਭਵ ਹੈ। ਮੈਂ ਤੈਨੂੰ ਬਹੁਤ ਪਿਆਰ ਕਰਦੀ ਹਾਂ।`;
