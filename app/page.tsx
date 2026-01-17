@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Sparkles, Mic, Play, StopCircle, RotateCcw, X } from 'lucide-react';
-import { supabase, Voice } from '@/lib/supabase';
+import { supabase, Voice, Story } from '@/lib/supabase';
 
 const PRESET_RELATIONSHIPS = [
   { id: 'mummy', label: 'Mummy', emoji: '👩' },
@@ -25,6 +25,7 @@ const RANDOM_STORY_PROMPTS = [
 
 export default function Home() {
   const [voices, setVoices] = useState<Voice[]>([]);
+  const [stories, setStories] = useState<Story[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedAudio, setGeneratedAudio] = useState<string | null>(null);
   const [storyText, setStoryText] = useState<string | null>(null);
@@ -44,6 +45,7 @@ export default function Home() {
 
   useEffect(() => {
     loadVoices();
+    loadStories();
   }, []);
 
   const loadVoices = async () => {
@@ -58,6 +60,20 @@ export default function Home() {
     }
 
     setVoices(data || []);
+  };
+
+  const loadStories = async () => {
+    const { data, error } = await supabase
+      .from('stories')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error loading stories:', error);
+      return;
+    }
+
+    setStories(data || []);
   };
 
   const getVoiceByRelationship = (relationship: string) => {
@@ -129,6 +145,9 @@ export default function Home() {
 
       const audioData = await audioResponse.json();
       setGeneratedAudio(audioData.audioUrl);
+
+      // Reload stories list to show the new story
+      await loadStories();
     } catch (error) {
       console.error('Error generating story:', error);
       alert('Failed to generate story. Please try again.');
@@ -330,7 +349,7 @@ export default function Home() {
 
         {/* Audio Player */}
         {generatedAudio && !isGenerating && (
-          <div className="bg-white rounded-2xl shadow-lg p-6">
+          <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
             <h2 className="text-2xl font-semibold text-purple-900 mb-4">
               Your Story is Ready! 🎉
             </h2>
@@ -342,6 +361,49 @@ export default function Home() {
             <audio controls autoPlay className="w-full" src={generatedAudio}>
               Your browser does not support the audio element.
             </audio>
+          </div>
+        )}
+
+        {/* Stories List */}
+        {stories.length > 0 && (
+          <div className="bg-white rounded-2xl shadow-lg p-6">
+            <h2 className="text-2xl font-semibold text-purple-900 mb-4">
+              Previous Stories 📚
+            </h2>
+            <div className="space-y-4">
+              {stories.map((story) => {
+                const voice = voices.find(v => v.id === story.voice_id);
+                return (
+                  <div key={story.id} className="p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-all">
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="flex-1">
+                        <h3 className="font-medium text-gray-900 mb-1">{story.title}</h3>
+                        {voice && (
+                          <p className="text-xs text-purple-600 mb-2">
+                            Narrated by {voice.name}
+                          </p>
+                        )}
+                        <p className="text-sm text-gray-700 line-clamp-2 mb-3">{story.content}</p>
+                      </div>
+                    </div>
+                    {story.audio_url && (
+                      <audio controls className="w-full" src={story.audio_url}>
+                        Your browser does not support the audio element.
+                      </audio>
+                    )}
+                    <p className="text-xs text-gray-500 mt-2">
+                      {new Date(story.created_at).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         )}
 
