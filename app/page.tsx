@@ -1,16 +1,17 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { Sparkles, Mic, Play, StopCircle, RotateCcw, X } from 'lucide-react';
 import { supabase, Voice, Story } from '@/lib/supabase';
 
 const PRESET_RELATIONSHIPS = [
-  { id: 'mummy', label: 'Mummy', emoji: '👩' },
-  { id: 'papa', label: 'Papa', emoji: '👳‍♂️' },
-  { id: 'dadu', label: 'Dadu', emoji: '👳‍♂️' },
-  { id: 'dadi', label: 'Dadi', emoji: '👵' },
-  { id: 'nanu', label: 'Nanu', emoji: '👳‍♂️' },
-  { id: 'naani', label: 'Naani', emoji: '👵' },
+  { id: 'mummy', label: 'Mummy', emoji: '👩', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mummy&backgroundColor=b6e3f4' },
+  { id: 'papa', label: 'Papa', emoji: '👳‍♂️', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Papa&backgroundColor=ffdfbf&accessories=prescription01&top=turban' },
+  { id: 'dadu', label: 'Dadu', emoji: '👳‍♂️', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Dadu&backgroundColor=d1d4f9&accessories=prescription02&top=turban&facialHair=beardMajestic' },
+  { id: 'dadi', label: 'Dadi', emoji: '👵', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Dadi&backgroundColor=ffd5dc&top=hijab' },
+  { id: 'nanu', label: 'Nanu', emoji: '👳‍♂️', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Nanu&backgroundColor=c0aede&accessories=prescription01&top=turban&facialHair=beardMedium' },
+  { id: 'naani', label: 'Naani', emoji: '👵', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Naani&backgroundColor=ffeaa7&top=hijab' },
 ];
 
 const PUNJABI_TRANSCRIPT = `ਮੇਰੀ ਪਿਆਰੀ ਲਿਵ, ਤੂੰ ਸਾਡੇ ਪਰਿਵਾਰ ਦਾ ਸਭ ਤੋਂ ਕੀਮਤੀ ਤੋਹਫ਼ਾ ਹੈਂ। ਹਰ ਦਿਨ ਤੇਰੇ ਨਾਲ ਇੱਕ ਨਵਾਂ ਅਨੁਭਵ ਹੈ। ਮੈਂ ਤੈਨੂੰ ਬਹੁਤ ਪਿਆਰ ਕਰਦੀ ਹਾਂ।`;
@@ -315,7 +316,14 @@ export default function Home() {
                   disabled={isGenerating || isCloning}
                   className="p-6 rounded-xl border-2 border-gray-200 hover:border-purple-500 hover:bg-purple-50 transition-all bg-white disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <div className="text-4xl mb-2">{preset.emoji}</div>
+                  <div className="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden bg-gray-100 relative">
+                    <Image
+                      src={preset.imageUrl}
+                      alt={preset.label}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                   <div className="font-medium text-gray-900">{preset.label}</div>
                   {!voice && (
                     <div className="text-xs text-purple-600 mt-1 font-medium">Tap to set up</div>
