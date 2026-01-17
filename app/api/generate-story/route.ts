@@ -27,8 +27,8 @@ export async function POST(request: NextRequest) {
 
     // Generate story using OpenAI with language support
     const systemPrompt = isPunjabi
-      ? `ਤੁਸੀਂ ਇੱਕ ਰਚਨਾਤਮਕ ਬੱਚਿਆਂ ਦੀ ਕਹਾਣੀ ਲੇਖਕ ਹੋ। ਲਿਵ ਨਾਮ ਦੀ ਇੱਕ ਛੋਟੀ ਕੁੜੀ ਲਈ ਦਿਲਚਸਪ, ਉਮਰ ਦੇ ਅਨੁਕੂਲ ਕਹਾਣੀਆਂ ਬਣਾਓ। ਕਹਾਣੀਆਂ ਨਿੱਘੀਆਂ, ਕਲਪਨਾਤਮਕ, ਅਤੇ ਸੌਣ ਦੇ ਸਮੇਂ ਜਾਂ ਖੇਡਣ ਦੇ ਸਮੇਂ ਲਈ ਢੁਕਵੀਆਂ ਹੋਣੀਆਂ ਚਾਹੀਦੀਆਂ ਹਨ। ਕਹਾਣੀਆਂ 200-300 ਸ਼ਬਦਾਂ ਦੇ ਵਿਚਕਾਰ ਰੱਖੋ। ਲਿਵ ਨੂੰ ਮੁੱਖ ਕਿਰਦਾਰ ਅਤੇ ਕਹਾਣੀ ਦੀ ਨਾਇਕਾ ਬਣਾਓ। ਕਹਾਣੀ ਪੰਜਾਬੀ ਵਿੱਚ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ।`
-      : `You are a creative children's story writer. Create engaging, age-appropriate stories for a baby girl named Liv. The stories should be warm, imaginative, and suitable for bedtime or playtime. Keep stories between 200-300 words. Make Liv the main character and hero of the story.`;
+      ? `ਤੁਸੀਂ ਇੱਕ ਰਚਨਾਤਮਕ ਬੱਚਿਆਂ ਦੀ ਕਹਾਣੀ ਲੇਖਕ ਹੋ। ਲਿਵ ਨਾਮ ਦੀ ਇੱਕ ਛੋਟੀ ਕੁੜੀ ਲਈ ਦਿਲਚਸਪ, ਉਮਰ ਦੇ ਅਨੁਕੂਲ ਕਹਾਣੀਆਂ ਬਣਾਓ। ਕਹਾਣੀਆਂ ਨਿੱਘੀਆਂ, ਕਲਪਨਾਤਮਕ, ਅਤੇ ਸੌਣ ਦੇ ਸਮੇਂ ਜਾਂ ਖੇਡਣ ਦੇ ਸਮੇਂ ਲਈ ਢੁਕਵੀਆਂ ਹੋਣੀਆਂ ਚਾਹੀਦੀਆਂ ਹਨ। ਕਹਾਣੀਆਂ 70-100 ਸ਼ਬਦਾਂ ਦੇ ਵਿਚਕਾਰ ਰੱਖੋ - ਬਹੁਤ ਛੋਟੀਆਂ ਅਤੇ ਮਿੱਠੀਆਂ। ਲਿਵ ਨੂੰ ਮੁੱਖ ਕਿਰਦਾਰ ਅਤੇ ਕਹਾਣੀ ਦੀ ਨਾਇਕਾ ਬਣਾਓ। ਕਹਾਣੀ ਪੰਜਾਬੀ ਵਿੱਚ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ।`
+      : `You are a creative children's story writer. Create engaging, age-appropriate stories for a baby girl named Liv. The stories should be warm, imaginative, and suitable for bedtime or playtime. Keep stories between 70-100 words - very short and sweet. Make Liv the main character and hero of the story.`;
 
     const userPrompt = isPunjabi
       ? `ਇਸ ਬਾਰੇ ਇੱਕ ਕਹਾਣੀ ਬਣਾਓ: ${prompt}. ਯਾਦ ਰੱਖੋ ਕਿ ਲਿਵ ਨੂੰ ਮੁੱਖ ਕਿਰਦਾਰ ਬਣਾਉਣਾ ਹੈ। ਕਹਾਣੀ ਪੰਜਾਬੀ ਵਿੱਚ ਲਿਖੋ।`
