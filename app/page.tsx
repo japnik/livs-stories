@@ -1,17 +1,16 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
 import { Sparkles, Mic, Play, StopCircle, RotateCcw, X } from 'lucide-react';
 import { supabase, Voice, Story } from '@/lib/supabase';
 
 const PRESET_RELATIONSHIPS = [
-  { id: 'mummy', label: 'Mummy', emoji: '👩', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mummy&backgroundColor=ffe5e5&top=longHairStraight&clotheType=graphicShirt&clotheColor=pink' },
-  { id: 'papa', label: 'Papa', emoji: '👳‍♂️', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Papa&backgroundColor=ffdab3&top=turban&facialHairType=beardMedium&facialHairColor=black&clotheType=hoodie&clotheColor=blue' },
-  { id: 'dadu', label: 'Dadu', emoji: '👳‍♂️', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Dadu&backgroundColor=d4e3ff&top=turban&facialHairType=beardMajestic&facialHairColor=gray&accessoriesType=prescription02&clotheType=blazerShirt' },
-  { id: 'dadi', label: 'Dadi', emoji: '👵', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Dadi&backgroundColor=fff0f5&top=longHairBun&accessoriesType=prescription01&clotheType=blazerSweater&clotheColor=pastelRed' },
-  { id: 'nanu', label: 'Nanu', emoji: '👳‍♂️', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Nanu&backgroundColor=e8d5ff&top=turban&facialHairType=beardLight&facialHairColor=gray&accessoriesType=prescription01&clotheType=shirtCrewNeck' },
-  { id: 'naani', label: 'Naani', emoji: '👵', imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Naani&backgroundColor=fffacd&top=longHairMiaWallace&accessoriesType=prescription02&clotheType=graphicShirt&clotheColor=pastelOrange' },
+  { id: 'mummy', label: 'Mummy', emoji: '👩', imageUrl: null },
+  { id: 'papa', label: 'Papa', emoji: '👳‍♂️', imageUrl: null },
+  { id: 'dadu', label: 'Dadu', emoji: '👳🏽‍♂️', imageUrl: null },
+  { id: 'dadi', label: 'Dadi', emoji: '👵', imageUrl: null },
+  { id: 'nanu', label: 'Nanu', emoji: '👳🏽‍♂️', imageUrl: null },
+  { id: 'naani', label: 'Naani', emoji: '👵', imageUrl: null },
 ];
 
 const PUNJABI_TRANSCRIPT = `ਮੇਰੀ ਪਿਆਰੀ ਲਿਵ, ਤੂੰ ਸਾਡੇ ਪਰਿਵਾਰ ਦਾ ਸਭ ਤੋਂ ਕੀਮਤੀ ਤੋਹਫ਼ਾ ਹੈਂ। ਹਰ ਦਿਨ ਤੇਰੇ ਨਾਲ ਇੱਕ ਨਵਾਂ ਅਨੁਭਵ ਹੈ। ਮੈਂ ਤੈਨੂੰ ਬਹੁਤ ਪਿਆਰ ਕਰਦੀ ਹਾਂ।`;
@@ -316,13 +315,8 @@ export default function Home() {
                   disabled={isGenerating || isCloning}
                   className="p-6 rounded-xl border-2 border-gray-200 hover:border-purple-500 hover:bg-purple-50 transition-all bg-white disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <div className="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden bg-gray-100 relative">
-                    <Image
-                      src={preset.imageUrl}
-                      alt={preset.label}
-                      fill
-                      className="object-cover"
-                    />
+                  <div className="w-20 h-20 mx-auto mb-3 rounded-full bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center text-5xl">
+                    {preset.emoji}
                   </div>
                   <div className="font-medium text-gray-900">{preset.label}</div>
                   {!voice && (
