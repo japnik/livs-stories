@@ -86,10 +86,12 @@ export default function Home() {
 
     // Pick a random story prompt
     const randomPrompt = RANDOM_STORY_PROMPTS[Math.floor(Math.random() * RANDOM_STORY_PROMPTS.length)];
-    setLoadingMessage(storyLanguage === 'pa' ? 'ਕਹਾਣੀ ਬਣਾਈ ਜਾ ਰਹੀ ਹੈ...' : 'Creating a magical story...');
 
     try {
-      const response = await fetch('/api/generate-story', {
+      // Step 1: Generate story text
+      setLoadingMessage(storyLanguage === 'pa' ? 'ਕਹਾਣੀ ਲਿਖੀ ਜਾ ਰਹੀ ਹੈ...' : 'Writing your story...');
+
+      const textResponse = await fetch('/api/generate-story-text', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -99,13 +101,34 @@ export default function Home() {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to generate story');
+      if (!textResponse.ok) {
+        throw new Error('Failed to generate story text');
       }
 
-      const data = await response.json();
-      setGeneratedAudio(data.audioUrl);
-      setStoryText(data.storyText);
+      const textData = await textResponse.json();
+      setStoryText(textData.storyText);
+
+      // Step 2: Generate audio from story text
+      setLoadingMessage(storyLanguage === 'pa' ? 'ਆਵਾਜ਼ ਬਣਾਈ ਜਾ ਰਹੀ ਹੈ...' : 'Creating audio...');
+
+      const audioResponse = await fetch('/api/generate-audio', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          storyText: textData.storyText,
+          voiceId: textData.voiceId,
+          elevenlabsVoiceId: textData.elevenlabsVoiceId,
+          language: textData.language,
+          prompt: randomPrompt,
+        }),
+      });
+
+      if (!audioResponse.ok) {
+        throw new Error('Failed to generate audio');
+      }
+
+      const audioData = await audioResponse.json();
+      setGeneratedAudio(audioData.audioUrl);
     } catch (error) {
       console.error('Error generating story:', error);
       alert('Failed to generate story. Please try again.');
@@ -297,7 +320,9 @@ export default function Home() {
                 {loadingMessage}
               </p>
               <p className="text-sm text-purple-600 mt-2">
-                This may take 30-60 seconds...
+                {loadingMessage.includes('Writing') || loadingMessage.includes('ਲਿਖੀ')
+                  ? 'Step 1 of 2: Writing the story (5-10 seconds)...'
+                  : 'Step 2 of 2: Generating high-quality audio (20-30 seconds)...'}
               </p>
             </div>
           </div>
