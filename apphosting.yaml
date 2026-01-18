@@ -1,0 +1,25 @@
+# Firebase App Hosting configuration
+# https://firebase.google.com/docs/app-hosting
+
+# Environment variables for the application
+env:
+  # Public variables (available at build time and runtime)
+  - variable: NEXT_PUBLIC_SUPABASE_URL
+    value: https://mfxvjcyvceskcitiezaz.supabase.co
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_SUPABASE_ANON_KEY
+    value: sb_publishable_lQqyjDKLt0A540fek-zNlQ_v1DhOiXL
+    availability:
+      - BUILD
+      - RUNTIME
+
+  # Server-side API keys (configured as secrets in Firebase Console)
+  # To add secrets, go to Firebase Console > App Hosting > Your App > Secrets
+  - variable: ELEVENLABS_API_KEY
+    secret: elevenlabs-api-key
+
+  - variable: OPENAI_API_KEY
+    secret: openai-api-key
