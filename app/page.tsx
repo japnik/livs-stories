@@ -1,16 +1,17 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { Sparkles, Mic, Play, StopCircle, RotateCcw, X } from 'lucide-react';
 import { supabase, Voice, Story } from '@/lib/supabase';
 
 const PRESET_RELATIONSHIPS = [
-  { id: 'mummy', label: 'Mummy', emoji: '👩', imageUrl: null },
-  { id: 'papa', label: 'Papa', emoji: '👳‍♂️', imageUrl: null },
-  { id: 'dadu', label: 'Dadu', emoji: '👳🏽‍♂️', imageUrl: null },
-  { id: 'dadi', label: 'Dadi', emoji: '👵', imageUrl: null },
-  { id: 'nanu', label: 'Nanu', emoji: '👳🏽‍♂️', imageUrl: null },
-  { id: 'naani', label: 'Naani', emoji: '👵', imageUrl: null },
+  { id: 'mummy', label: 'Mummy', emoji: '👩', imageUrl: '/avatars/mummy.svg' },
+  { id: 'papa', label: 'Papa', emoji: '👳‍♂️', imageUrl: '/avatars/papa.svg' },
+  { id: 'dadu', label: 'Dadu', emoji: '👳🏽‍♂️', imageUrl: '/avatars/dadu.svg' },
+  { id: 'dadi', label: 'Dadi', emoji: '👵', imageUrl: '/avatars/dadi.svg' },
+  { id: 'nanu', label: 'Nanu', emoji: '👳🏽‍♂️', imageUrl: '/avatars/nanu.svg' },
+  { id: 'naani', label: 'Naani', emoji: '👵', imageUrl: '/avatars/naani.svg' },
 ];
 
 const PUNJABI_TRANSCRIPT = `ਮੇਰੀ ਪਿਆਰੀ ਲਿਵ, ਤੂੰ ਸਾਡੇ ਪਰਿਵਾਰ ਦਾ ਸਭ ਤੋਂ ਕੀਮਤੀ ਤੋਹਫ਼ਾ ਹੈਂ। ਹਰ ਦਿਨ ਤੇਰੇ ਨਾਲ ਇੱਕ ਨਵਾਂ ਅਨੁਭਵ ਹੈ। ਮੈਂ ਤੈਨੂੰ ਬਹੁਤ ਪਿਆਰ ਕਰਦੀ ਹਾਂ।`;
@@ -315,8 +316,18 @@ export default function Home() {
                   disabled={isGenerating || isCloning}
                   className="p-6 rounded-xl border-2 border-gray-200 hover:border-purple-500 hover:bg-purple-50 transition-all bg-white disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <div className="w-20 h-20 mx-auto mb-3 rounded-full bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center text-5xl">
-                    {preset.emoji}
+                  <div className="w-20 h-20 mx-auto mb-3 rounded-full bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center overflow-hidden">
+                    {preset.imageUrl ? (
+                      <Image
+                        src={preset.imageUrl}
+                        alt={preset.label}
+                        width={80}
+                        height={80}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <span className="text-5xl">{preset.emoji}</span>
+                    )}
                   </div>
                   <div className="font-medium text-gray-900">{preset.label}</div>
                   {!voice && (

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="50" fill="#FFE4C4"/>
+  <!-- Face -->
+  <circle cx="35" cy="48" r="3" fill="#000"/>
+  <circle cx="65" cy="48" r="3" fill="#000"/>
+  <path d="M 35 62 Q 50 68 65 62" stroke="#000" stroke-width="2" fill="none"/>
+  <!-- Hair/Dupatta -->
+  <path d="M 20 40 Q 20 20 50 18 Q 80 20 80 40 L 80 55 Q 80 60 75 60 L 25 60 Q 20 60 20 55 Z" fill="#DDA0DD"/>
+  <circle cx="50" cy="60" r="3" fill="#FFD700"/>
+  <!-- Bindi -->
+  <circle cx="50" cy="38" r="2" fill="#DC143C"/>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="50" fill="#FFE4C4"/>
+  <!-- Face -->
+  <circle cx="35" cy="45" r="3" fill="#000"/>
+  <circle cx="65" cy="45" r="3" fill="#000"/>
+  <path d="M 35 60 Q 50 70 65 60" stroke="#000" stroke-width="2" fill="none"/>
+  <!-- Hair -->
+  <path d="M 25 35 Q 25 15 50 15 Q 75 15 75 35 L 75 45 Q 75 50 70 50 L 30 50 Q 25 50 25 45 Z" fill="#8B4513"/>
+</svg>
